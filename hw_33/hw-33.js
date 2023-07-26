@@ -26,10 +26,10 @@ console.log(subjectString);
 
 // 2 task
 
-let sumStudentsAndTeachers = 0;
-for (let key in subjects){
-  sumStudentsAndTeachers = sumStudentsAndTeachers + subjects[key].students+subjects[key].teachers;
-}
+let newArrayForSum = Object.values(subjects);
+let sumStudentsAndTeachers = newArrayForSum.reduce(function(sum, current){
+ return sum + current.teachers+current.students;
+},0)
 console.log(sumStudentsAndTeachers);
 
 // 3 task
