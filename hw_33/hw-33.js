@@ -29,7 +29,7 @@ console.log(subjectString);
 let newArrayForSum = Object.values(subjects);
 let sumStudentsAndTeachers = newArrayForSum.reduce(function(sum, current){
  return sum + current.teachers+current.students;
-},0)
+}, 0)
 console.log(sumStudentsAndTeachers);
 
 // 3 task
@@ -52,15 +52,10 @@ console.log(subjectsValuesArray);
 let arr = Object.entries(subjects);
 
 arr.sort(function sortedFunction(a, b){
-  if (a[1].teachers>b[1].teachers) {
+  if (a[1].teachers > b[1].teachers) {
     return -1;
   }
-  if (a[1].teachers<b[1].teachers) {
-    return 1;
-  }
-  if (a[1].teachers===b[1].teachers) {
-    return 0;
-  }
+  return a[1].teachers > b[1].teachers ? -1 : 1
 })
 
 let newArr = [];
