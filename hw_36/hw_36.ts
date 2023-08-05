@@ -160,7 +160,7 @@ console.log(filteredPlotArray(movies,"with"));
 // Task 8
 type MyType = string | number | string[]
 let filteredMovie = <T extends IMovie>(array: T[], name: string, str: MyType):T[] => {
-  return array.filter((movie) => movie[name] === str)
+  return array.filter((movie:IMovie) => movie[name] === str)
 }
 console.log(filteredMovie(movies, "year", 2011));
 
