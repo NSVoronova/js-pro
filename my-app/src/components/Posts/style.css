@@ -1,0 +1,12 @@
+.posts__wrapper {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.middle__posts{
+  width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+}
