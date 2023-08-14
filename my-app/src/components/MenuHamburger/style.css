@@ -1,0 +1,40 @@
+.burger__container, .burger__opened {
+  width: 100%;
+  height: 50px;
+  background-color: rgb(68, 33, 145);
+  color: white;
+  display: flex;
+  align-items: center;
+}
+.burger__container button {
+  color: white;
+  width: 50px;
+  height: 100%;
+  background-color: rgb(68, 33, 145);
+  cursor: pointer;
+  border: none;
+}
+.search__container {
+  width: 80%;
+  height: 50px;
+  background-color: rgb(92, 67, 146);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+.user {
+  padding: 10px;
+  text-align: center;
+  width: 10%;
+}
+.burger__opened {
+  display: none;
+  width: 180px;
+  text-align: center;
+  justify-content: center;
+}
+.visible {
+  position: absolute;
+  display: flex;
+}

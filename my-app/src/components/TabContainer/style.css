@@ -1,0 +1,32 @@
+.tabs__container {
+  margin: 100px auto;
+  width: 90%;
+  height: 300px;
+}
+
+.tabs {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: 800;
+  border-bottom: 2px solid rgba(173, 173, 173, 0.707);
+}
+.tab {
+  width: 15%;
+  height: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+.tab:hover {
+  color: blue;
+}
+.active {
+  position: relative;
+  top:0;
+  left: 0;
+  height: 50px;
+  border-bottom: 2px solid black;
+}
