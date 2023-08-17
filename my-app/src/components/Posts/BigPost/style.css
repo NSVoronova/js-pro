@@ -1,29 +1,30 @@
 .big__post__wrapper {
-  width: 600px;
+  width: 100%;
   margin: 20px auto;
 }
 
 .big__post {
   margin: 0px auto;
-  width: 600px;
+  width: 100%;
   display: flex;
+  justify-content: space-between;
 }
 .big__post img {
   width: 250px;
   height: 200px;
   object-fit: cover;
-  margin-left: 30px;
+  margin-left: 10px;
 }
 
 .post__decription {
-  width: 300px;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .reactions {
-  width: 95%;
+  width: 100%;
   margin-top: 10px;
   display: flex;
   justify-content: space-between;

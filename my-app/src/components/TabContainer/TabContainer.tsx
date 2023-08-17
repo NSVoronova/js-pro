@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Tab from '../Tab/Tab'
 import "./style.css"
+import PostsList from '../Posts/PostsList';
 
 const TabContainer = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -10,7 +11,7 @@ const TabContainer = () => {
   };
 
   const tabsData = [
-    { label: 'All', content: ' Tab 1' },
+    { label: 'All', content: <PostsList/> },
     { label: 'My favorites', content: 'Tab 2' },
     { label: 'Popular', content: ' Tab 3' },
   ];

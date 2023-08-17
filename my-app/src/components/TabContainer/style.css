@@ -1,7 +1,6 @@
 .tabs__container {
-  margin: 100px auto;
-  width: 90%;
-  height: 300px;
+  margin: 100px auto 10px;
+  width: 100%;
 }
 
 .tabs {
@@ -15,13 +14,13 @@
   border-bottom: 2px solid rgba(173, 173, 173, 0.707);
 }
 .tab {
-  width: 15%;
+  width: 17%;
   height: 100%;
   text-align: center;
   cursor: pointer;
 }
 .tab:hover {
-  color: blue;
+  color: cornflowerblue;
 }
 .active {
   position: relative;
