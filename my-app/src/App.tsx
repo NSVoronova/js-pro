@@ -10,13 +10,15 @@ import SuccessfulLoginPage from './components/SuccessfulLoginPage/SuccessfulLogi
 import SignPage from './components/SignForm/SignPage/SignPage';
 import BlogPage from './components/Posts/BlogPage/BlogPage';
 import PostViewPage from './components/Posts/PostViewPage/PostViewPage';
+import SignUpPage from './components/SignForm/SignUpPage/SignUpPage';
 
 const App = () => {
   return (
     <div className='wrapper'>
     <Header/>
       <main>
-        <SignPage/>
+        <SignUpPage/>
+        {/* <SignPage/> */}
         {/* <SuccessfulLoginPage/> */}
         {/* <BlogPage/> */}
         {/* <PostViewPage/> */}
