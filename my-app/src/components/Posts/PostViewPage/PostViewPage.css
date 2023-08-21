@@ -1,0 +1,30 @@
+.post__view {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  text-align: left;
+}
+
+.post__view> img {
+  margin: 20px;
+}
+
+.post__view >p {
+  margin: 30px;
+}
+.post__view> .reactions {
+  width: 90%;
+  margin:0 30px;
+}
+ .bookmark img {
+  position: relative;
+  top: 5px;
+}
+
+.posts__navigation {
+  margin-top: 30px;
+  padding-top: 60px;
+  border-top: 1px solid rgb(211, 211, 211);
+  display: flex;
+  justify-content: space-between;
+}

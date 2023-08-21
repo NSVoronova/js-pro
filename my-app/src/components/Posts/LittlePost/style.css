@@ -2,6 +2,9 @@
   width: 300px;
   margin: 20px auto 40px;
 }
+.little__posts {
+  margin-left: 40px;
+}
 .little__post {
   display: flex;
   justify-content: space-between;

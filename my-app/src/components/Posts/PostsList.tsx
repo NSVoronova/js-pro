@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import BigPost from './BigPost/BigPost'
 import MiddlePost from './MiddlePost/MiddlePost'
 import LittlePost from './LittlePost/LittlePost'
@@ -21,36 +21,42 @@ const PostsList = () => {
     try {
       let responce = await fetch('https://64d916c7e947d30a2609e71e.mockapi.io/posts_cards');
       let jsonPosts: IPost[] = await responce.json();
-      
+      console.log(jsonPosts)
       setPosts(jsonPosts);
     } catch (err) {
-      alert("LOL");  
-      // здесь пыталась выводить в консоль ошибку, но реакт ругается почему-то...
+      console.log(err);  
     }
   }
+
+  useEffect(()=>{
+    fetchPosts()
+  },[])
+  
   return (
     <>
-      <button onClick={fetchPosts}>
-        Click me
-      </button>
       <div className='posts__wrapper'>
         <div className='big-middle__posts'>
-          <div className='big__post'>
-          {posts.map(({id, title, image, text, date}: IPost) => (
+          <div className='big__post post'>
+          { Array.isArray(posts) && posts.map(({id, title, image, text, date}: IPost) => (
         id === 1  ? (
           <BigPost key={image} id={id} title={title} text={text} image={image} date={date} />) : <></>))}
           </div>
-          <div className='middle__posts'>
-          {posts.map(({id, title, image, text, date}: IPost) => (
+          <div className='middle__posts post'>
+          {Array.isArray(posts) && posts.map(({id, title, image, text, date}: IPost) => (
         id > 1 && id < 6  ? (
           <MiddlePost key={image} id={id} title={title} text={text} image={image} date={date} />) : <></>))}
           </div>
         </div>
-          <div className='little__posts'>
-          {posts.map(({id, title, image, text, date}: IPost) => (
+          <div className='little__posts post'>
+          { Array.isArray(posts) && posts.map(({id, title, image, text, date}: IPost) => (
         id > 5  ? (
           <LittlePost key={image} id={id} title={title} text={text} image={image} date={date} />) : <></>))}
           </div>
+      </div>
+      <div className='pagination'>
+        <div>🠔 Назад</div>
+        <div>1 2 3 ... 6</div>
+        <div>Вперед 🠖</div>
       </div>
     </>
   )
