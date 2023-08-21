@@ -1,8 +1,6 @@
-import React, {useState, useEffect} from 'react'
-import BigPost from './BigPost/BigPost'
+import React, { useState, useEffect } from 'react'
 import MiddlePost from './MiddlePost/MiddlePost'
-import LittlePost from './LittlePost/LittlePost'
-import './style.css'
+import './PostsListStyle.css'
 
 export interface IPost {
   image: string,
@@ -12,6 +10,7 @@ export interface IPost {
   title: string,
   author?: number,
   id: number,
+  customClass: string
 }
 
 const PostsList = () => {
@@ -24,34 +23,27 @@ const PostsList = () => {
       console.log(jsonPosts)
       setPosts(jsonPosts);
     } catch (err) {
-      console.log(err);  
+      console.log(err);
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchPosts()
-  },[])
-  
+  }, [])
+
   return (
     <>
       <div className='posts__wrapper'>
-        <div className='big-middle__posts'>
-          <div className='big__post post'>
-          { Array.isArray(posts) && posts.map(({id, title, image, text, date}: IPost) => (
-        id === 1  ? (
-          <BigPost key={image} id={id} title={title} text={text} image={image} date={date} />) : <></>))}
-          </div>
-          <div className='middle__posts post'>
-          {Array.isArray(posts) && posts.map(({id, title, image, text, date}: IPost) => (
-        id > 1 && id < 6  ? (
-          <MiddlePost key={image} id={id} title={title} text={text} image={image} date={date} />) : <></>))}
-          </div>
+        <div className='middle__post__wrapper'>
+          {Array.isArray(posts) && posts.map(({ id, title, image, text, date }: IPost) => (
+            id < 7 ?
+              <MiddlePost key={image} id={id} title={title} text={text} image={image} date={date} customClass='middle__post' /> : <></>))}
         </div>
-          <div className='little__posts post'>
-          { Array.isArray(posts) && posts.map(({id, title, image, text, date}: IPost) => (
-        id > 5  ? (
-          <LittlePost key={image} id={id} title={title} text={text} image={image} date={date} />) : <></>))}
-          </div>
+        <div className='small__post__wrapper'>
+          {Array.isArray(posts) && posts.map(({ id, title, image, text, date }: IPost) => (
+            id >= 7 ?
+              <MiddlePost key={id} id={id} title={title} text={text} image={image} date={date} customClass='small__post' /> : <></>))}
+        </div>
       </div>
       <div className='pagination'>
         <div>🠔 Назад</div>

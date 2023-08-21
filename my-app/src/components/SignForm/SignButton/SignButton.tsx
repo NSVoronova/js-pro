@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 
 interface IButton {
   text: string;
   type?: string;
   onClick: () => void;
-  customClass: string
+  customClass: string;
 }
 
 const SignButton: React.FC<IButton> = (props) => {
@@ -15,4 +15,4 @@ const SignButton: React.FC<IButton> = (props) => {
   );
 };
 
-export default SignButton
+export default SignButton;
