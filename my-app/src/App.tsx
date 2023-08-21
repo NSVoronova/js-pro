@@ -17,10 +17,10 @@ const App = () => {
     <div className='wrapper'>
     <Header/>
       <main>
-        <SignUpPage/>
+        {/* <SignUpPage/> */}
         {/* <SignPage/> */}
         {/* <SuccessfulLoginPage/> */}
-        {/* <BlogPage/> */}
+        <BlogPage/>
         {/* <PostViewPage/> */}
       </main>
       <footer>

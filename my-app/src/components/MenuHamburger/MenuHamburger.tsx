@@ -1,19 +1,17 @@
-import React, {useState} from 'react'
-import "./style.css"
+import React, { useState } from "react";
+import "./style.css";
 
 export interface IBurger {
   text: string;
-  customClass: string
+  customClass: string;
   onClick: () => void;
 }
-const MenuHamburger = ({text, customClass, onClick}: IBurger ) => {
+const MenuHamburger = ({ text, customClass, onClick }: IBurger) => {
   return (
-    <button className={customClass} 
-    onClick={onClick}
-    >
+    <button className={customClass} onClick={onClick}>
       {text}
     </button>
-  )
-}
+  );
+};
 
-export default MenuHamburger
+export default MenuHamburger;
