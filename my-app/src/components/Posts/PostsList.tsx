@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import {Link} from 'react-router-dom'
 import MiddlePost from './MiddlePost/MiddlePost'
 import './PostsListStyle.css'
+import '../SignForm/Input/styled'
 
 export interface IPost {
   image: string,
@@ -37,12 +39,12 @@ const PostsList = () => {
         <div className='middle__post__wrapper'>
           {Array.isArray(posts) && posts.map(({ id, title, image, text, date }: IPost) => (
             id < 7 ?
-              <MiddlePost key={image} id={id} title={title} text={text} image={image} date={date} customClass='middle__post' /> : <></>))}
+              <Link key={id} to={`/post/${id}`} state={{posts, id, title, image, text}}> <MiddlePost key={image} id={id} title={title} text={text} image={image} date={date} customClass='middle__post' /></Link> : <></>))}
         </div>
         <div className='small__post__wrapper'>
           {Array.isArray(posts) && posts.map(({ id, title, image, text, date }: IPost) => (
             id >= 7 ?
-              <MiddlePost key={id} id={id} title={title} text={text} image={image} date={date} customClass='small__post' /> : <></>))}
+            <Link key={id} to={`/post/${id}`} state={{posts, id, title, image, text}}><MiddlePost key={id} id={id} title={title} text={text} image={image} date={date} customClass='small__post' /></Link> : <></>))}
         </div>
       </div>
       <div className='pagination'>

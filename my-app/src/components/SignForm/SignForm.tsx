@@ -7,8 +7,8 @@ const SignForm = ({
   customClass,
   children,
 }: {
-  customClass: string;
-  children: ReactNode;
+  customClass?: string;
+  children?: ReactNode;
 }) => {
   const [isSignIn, setSignIn] = useState(false);
 

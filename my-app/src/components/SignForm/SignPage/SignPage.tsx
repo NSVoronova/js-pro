@@ -1,26 +1,31 @@
 import React, { useState } from "react";
+import {Link, useNavigate} from 'react-router-dom'
 import Title from "src/components/Title/Title";
 import SignForm from "../SignForm";
 import Input from "../Input/Input";
 import SignButton from "../SignButton/SignButton";
+import MainLayout from "src/components/MainLayout/MainLayout";
 
 const SignPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
   let user = {
     email: "a",
     password: "1234",
   };
   const handleClick = () => {
     if (email === user.email && password === user.password) {
-      console.log("Молодец!");
+      navigate("/success");
     } else {
-      console.log("Попробуй еще раз");
+      alert("Попробуй еще раз");
     }
   };
   return (
     <>
-      <div>Back to home...</div>
+    <MainLayout>
+      <Link to='/'>Back to home...</Link>
       <Title text="Sign In"></Title>
       <SignForm customClass="sign-in__form">
         <Input
@@ -45,6 +50,7 @@ const SignPage = () => {
           customClass="sign__button"
         />
       </SignForm>
+      </MainLayout>
     </>
   );
 };

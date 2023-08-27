@@ -3,8 +3,8 @@ import React from "react";
 interface IButton {
   text: string;
   type?: string;
-  onClick: () => void;
-  customClass: string;
+  onClick?: () => void;
+  customClass?: string;
 }
 
 const SignButton: React.FC<IButton> = (props) => {
