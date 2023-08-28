@@ -1,0 +1,20 @@
+.search__post  {
+  width: 400px;
+  margin-top: 20px;
+}
+.search__post> img {
+  width: 400px;
+  margin-bottom: 10px;
+}
+.bookmark > img {
+  width: 20px;
+}
+.reactions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search__span {
+  color: cornflowerblue;
+}

@@ -6,8 +6,12 @@
   column-gap: 24px;
   row-gap: 30px;
 }
-.middle__post {
+.middle__post__wrapper a {
   width: 48%;
+  color: black;
+}
+.middle__post {
+  width: 100%;
 }
 
 .middle__post>img{
@@ -21,10 +25,17 @@
   margin-top: 23px;
   width: 33%;
 }
+.small__post__wrapper a {
+  color: black;
+}
 .reactions {
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
+}
+.small__post> .reactions {
+  margin-top: 50px;
+  width: 100%;
 }
 
 .reactions img {

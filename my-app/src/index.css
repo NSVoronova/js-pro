@@ -21,6 +21,10 @@ code {
 html, body, #root {
   height: 100%;
 }
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
 main {
   position: relative;
   top: 0;

@@ -1,13 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, ReactNode, FC, createContext } from "react";
+import { Link } from "react-router-dom";
 import MenuHamburger from "../MenuHamburger/MenuHamburger";
-import { StyledUserImg } from "./styledHeader";
+import {
+  StyledUserImg,
+  StyledBurgerUserDiv,
+  StyledBurgerHomeDiv,
+  StyledBurgerThemeDiv,
+  StyledInOutDiv,
+  StyledThemeDiv,
+} from "./styledHeader";
+import { IMainLayout } from "../MainLayout/MainLayout";
 
-const Header = () => {
+export interface IHeader {
+  className?: string,
+  children?: ReactNode,
+  isLight?: boolean,
+}
+
+const Header: FC<IHeader> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLight, setIsLight] = useState(true);
 
   const handleBurgerClick = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleToggle = () => {
+    setIsLight(prevState => !prevState)
+  }
   return (
     <>
       <div className="burger__container">
@@ -16,17 +36,23 @@ const Header = () => {
           text={isOpen ? "╳" : "☰"}
           onClick={handleBurgerClick}
         ></MenuHamburger>
-        <div className="search__container">
-          <div>Search...</div>
-          <div>╳</div>
-        </div>
-        <button>&#x1f50d;</button>
+        <div className="search__container">{children}</div>
+        <Link to="/search">&#x1f50d;</Link>
         <div className="user">
+          {}
           <StyledUserImg src="images/icon.png" alt="user" />
         </div>
       </div>
       <div className={`burger__opened ${isOpen ? "visible" : ""}`}>
-        Artem Malkin
+        <StyledBurgerUserDiv>Artem Malkin</StyledBurgerUserDiv>
+        <StyledBurgerHomeDiv>
+          <Link to="/">Home</Link>
+        </StyledBurgerHomeDiv>
+        <StyledBurgerThemeDiv>
+          <StyledThemeDiv isLight={isLight} onClick={handleToggle}>sun</StyledThemeDiv>
+          <StyledThemeDiv isLight={!isLight} onClick={handleToggle}>moon</StyledThemeDiv>
+        </StyledBurgerThemeDiv>
+        <StyledInOutDiv>Log Out</StyledInOutDiv>
       </div>
     </>
   );

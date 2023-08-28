@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { StyledInput, StyledLabel } from "./styled";
 
 interface IInput {
-  label: string;
+  label?: string;
   placeholder: string;
   type: "password" | "text";
   value: string;
@@ -18,7 +18,7 @@ const Input: FC<IInput> = ({ label, placeholder, type, value, onChange }) => {
   };
 
   return (
-    <div>
+    <>
       <StyledLabel>{label}</StyledLabel>
       <StyledInput
         type={type}
@@ -26,7 +26,7 @@ const Input: FC<IInput> = ({ label, placeholder, type, value, onChange }) => {
         value={value}
         onChange={(e) => onChange(e.currentTarget.value)}
       />
-    </div>
+    </>
   );
 };
 

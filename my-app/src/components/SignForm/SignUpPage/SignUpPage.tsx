@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import {Link} from 'react-router-dom'
 import Title from "src/components/Title/Title";
 import SignForm from "../SignForm";
 import Input from "../Input/Input";
 import SignButton from "../SignButton/SignButton";
 import { StyledA, StyledP } from "./styled";
+import MainLayout from "src/components/MainLayout/MainLayout";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +26,8 @@ const SignUpPage = () => {
   };
   return (
     <>
-      <StyledA href="#">Back to home...</StyledA>
+    <MainLayout>
+      <Link to='/'>Back to home...</Link>
       <Title text="Sign Up"></Title>
       <SignForm customClass="sign-in__form">
         <Input
@@ -61,9 +64,10 @@ const SignUpPage = () => {
           customClass="sign__button"
         />
         <StyledP>
-          Already have account? <a href="#">Sign In</a>
+          Already have account? <Link to='/signin'>Sign In</Link>
         </StyledP>
       </SignForm>
+      </MainLayout>
     </>
   );
 };

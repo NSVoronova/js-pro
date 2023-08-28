@@ -17,7 +17,7 @@
   border: none;
 }
 .search__container {
-  width: 87%;
+  width: 80%;
   height: 50px;
   background-color: cornflowerblue;
   display: flex;
@@ -28,17 +28,22 @@
 .user {
   padding: 10px;
   text-align: center;
-  width: 50px;
+  width: 80px;
 }
 .burger__opened {
   display: none;
-  width: 180px;
+  width: 175px;
   text-align: center;
   justify-content: center;
 }
 .visible {
   position: absolute;
+  z-index: 3;
+  height: calc(100% - 46px);
   top: 45px;
   left: 0;
   display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  align-items: center;
 }
