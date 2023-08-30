@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import "./style.css";
+import { useSelector } from "react-redux";
 
 export interface ITitle {
   text?: string;
@@ -7,7 +8,9 @@ export interface ITitle {
   customClass?: string;
 }
 const Title = ({ text }: ITitle) => {
-  return <h1>{text}</h1>;
+
+  const theme = useSelector(({theme}) => theme)
+  return <h1 className={theme === "light" ? "light__title" : "dark__theme"}>{text}</h1>;
 };
 
 export default Title;

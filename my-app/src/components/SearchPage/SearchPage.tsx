@@ -6,6 +6,9 @@ import MainLayout from '../MainLayout/MainLayout'
 import { IPost } from '../Posts/PostsList'
 import MiddlePost from '../Posts/MiddlePost/MiddlePost'
 import "./SearchPage.css"
+import { StyledMain, StyledFooter } from '../MainLayout/styledLayout';
+import { useSelector } from 'react-redux'
+import Title from '../Title/Title'
 
 const SearchPage = () => {
    const [dataSearch, setDataSearch] = useState("");
@@ -21,6 +24,7 @@ const SearchPage = () => {
       console.log(err);
     }
   }
+  const theme = useSelector(({theme}) => theme);
 
   useEffect(() => {
     fetchPosts()
@@ -41,17 +45,17 @@ const SearchPage = () => {
           onChange={setDataSearch}
         />
       </Header>
-      <main>
-        <h1>Search results <span className='search__span'>{dataSearch}</span></h1>
+      <StyledMain theme={theme}>
+        <Title text='Search results '></Title> <h1 className='search__span'>{dataSearch}</h1>
         <div>
           {Array.isArray(searchPosts) && searchPosts.map(({ id, title, image, text, date }: IPost) => (
             dataSearch.length >2 ? <MiddlePost key={id} id={id} title={title} text={text} image={image} date={date} customClass='search__post' /> : null ))}
         </div>
-      </main>
-      <footer>
+      </StyledMain>
+      <StyledFooter theme={theme}>
         <span>2022</span>
         <span>All rights reserved</span>
-      </footer>
+      </StyledFooter>
     </div>
   );
 }

@@ -19,20 +19,14 @@ import Home from './components/Home/Home';
 const App = () => {
   return (
 <Routes>
-  <Route path='/' element={<Home/>}/>
-  <Route path='/signup' element={<SignUpPage/>}/>
-  <Route path='/signin' element={<SignPage/>}/>
+  <Route path='/' element={<MainLayout children={<Home/>}/>}/>
+  <Route path='/signup' element={<MainLayout children={<SignUpPage/>}/>}/>
+  <Route path='/signin' element={<MainLayout children={<SignPage/>}/>}/>
   <Route path='/search' element={<SearchPage/>}/>
   <Route path='/posts' element={<MainLayout children={<BlogPage/>}/>}/>
   <Route path='/success' element={<MainLayout children={<SuccessfulLoginPage/>}/>}/>
   <Route path='/post/:id' element={<MainLayout children={<PostViewPage/>}/>}/>
  </Routes>
-    // <Home/>
-    // <Header/>
-    //  <MainLayout></MainLayout>
-      // <SearchPage/>
-  //  <SignPage/>
-
   );
 }
 

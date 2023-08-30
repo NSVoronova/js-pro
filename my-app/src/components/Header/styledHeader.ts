@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const StyledHeader = styled.header`
+position: fixed;
+z-index: 2;
+width: 100%;
+`
 export const StyledUserImg = styled.img`
   width: 32px;
 `;
@@ -9,15 +14,16 @@ export const StyledBurgerUserDiv = styled.div`
   padding: 20px;
 `;
 
-export const StyledBurgerHomeDiv = styled.div`
+export const StyledBurgerHomeDiv = styled.div<{theme: "light" | "dark"}>`
   padding-top: 20px;
   width: 100%;
-  height: 100%;
-  background-color: rgb(255, 255, 255);
-  color: black;
+  height: calc(100vh - 48px);
+  background-color: ${props => props.theme === "light" ? "white" : "rgba(128, 128, 128)"};
+  color: ${props => props.theme === "light" ? "rgb(235, 231, 231)" : "rgba(128, 128, 128)"};
 `;
 
 export const StyledBurgerThemeDiv = styled.div`
+  cursor: pointer;
   display: flex;
   justify-content: space-around;
   padding: 20px;
@@ -35,4 +41,7 @@ padding: 20px;
 
 export const StyledThemeDiv = styled.div<{isLight?: boolean}>`
 color: ${props => props.isLight ? 'grey' : 'black'};
+`
+export const StyledLinkSpan = styled.span<{theme: "light" | "dark"}>`
+color: ${props => props.theme === "light" ? "black" : "white"}
 `

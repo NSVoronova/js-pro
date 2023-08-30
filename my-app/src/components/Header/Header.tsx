@@ -8,8 +8,12 @@ import {
   StyledBurgerThemeDiv,
   StyledInOutDiv,
   StyledThemeDiv,
+  StyledLinkSpan,
+  StyledHeader,
 } from "./styledHeader";
 import { IMainLayout } from "../MainLayout/MainLayout";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export interface IHeader {
   className?: string,
@@ -18,6 +22,7 @@ export interface IHeader {
 }
 
 const Header: FC<IHeader> = ({ children }) => {
+
   const [isOpen, setIsOpen] = useState(false);
   const [isLight, setIsLight] = useState(true);
 
@@ -26,10 +31,19 @@ const Header: FC<IHeader> = ({ children }) => {
   };
 
   const handleToggle = () => {
-    setIsLight(prevState => !prevState)
+    setIsLight(prevState => !prevState);
+  }
+
+  const theme = useSelector(({theme}) => theme);
+
+  const dispatch = useDispatch();
+
+  let toggleThemeFunction = (theme : string) => {
+    dispatch({type: "TOGGLE_THEME", payload: theme});
+    handleToggle();
   }
   return (
-    <>
+    <StyledHeader>
       <div className="burger__container">
         <MenuHamburger
           customClass="closed"
@@ -45,16 +59,16 @@ const Header: FC<IHeader> = ({ children }) => {
       </div>
       <div className={`burger__opened ${isOpen ? "visible" : ""}`}>
         <StyledBurgerUserDiv>Artem Malkin</StyledBurgerUserDiv>
-        <StyledBurgerHomeDiv>
-          <Link to="/">Home</Link>
+        <StyledBurgerHomeDiv theme={theme}>
+          <Link to="/"><StyledLinkSpan theme={theme}>Home</StyledLinkSpan></Link>
         </StyledBurgerHomeDiv>
         <StyledBurgerThemeDiv>
-          <StyledThemeDiv isLight={isLight} onClick={handleToggle}>sun</StyledThemeDiv>
-          <StyledThemeDiv isLight={!isLight} onClick={handleToggle}>moon</StyledThemeDiv>
+          <StyledThemeDiv isLight={isLight} onClick={() => toggleThemeFunction("light")}>sun</StyledThemeDiv>
+          <StyledThemeDiv isLight={!isLight} onClick={() => toggleThemeFunction("dark")}>moon</StyledThemeDiv>
         </StyledBurgerThemeDiv>
         <StyledInOutDiv>Log Out</StyledInOutDiv>
       </div>
-    </>
+    </StyledHeader>
   );
 };
 

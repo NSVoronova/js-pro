@@ -11,7 +11,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(235, 231, 231);
 }
 
 code {
@@ -24,12 +23,14 @@ html, body, #root {
 a {
   text-decoration: none;
   cursor: pointer;
+  color: black;
 }
 main {
   position: relative;
   top: 0;
   left: 0;
-  padding: 40px 250px;
+  width: 1000px;
+  margin: 0 auto;
   flex-grow: 1;
   align-items: center;
 }
@@ -43,8 +44,7 @@ main {
   footer {
     display: flex;
     justify-content: space-between;
-    margin: 0px 180px;
-    padding: 20px 0;
+    padding: 18px 180px;
     border-top: 1px solid rgb(211, 211, 211);
   }
 

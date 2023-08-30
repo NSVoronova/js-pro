@@ -11,7 +11,13 @@
   color: black;
 }
 .middle__post {
+  width: 48%;
+}
+.modal__post {
   width: 100%;
+}
+.modal__post>img {
+  width: 600px;
 }
 
 .middle__post>img{
@@ -41,6 +47,7 @@
 .reactions img {
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 
 h3 {

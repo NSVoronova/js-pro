@@ -24,8 +24,8 @@ const SignPage = () => {
   };
   return (
     <>
-    <MainLayout>
       <Link to='/'>Back to home...</Link>
+      <br/>
       <Title text="Sign In"></Title>
       <SignForm customClass="sign-in__form">
         <Input
@@ -50,7 +50,6 @@ const SignPage = () => {
           customClass="sign__button"
         />
       </SignForm>
-      </MainLayout>
     </>
   );
 };

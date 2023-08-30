@@ -26,8 +26,8 @@ const SignUpPage = () => {
   };
   return (
     <>
-    <MainLayout>
       <Link to='/'>Back to home...</Link>
+      <br/>
       <Title text="Sign Up"></Title>
       <SignForm customClass="sign-in__form">
         <Input
@@ -67,7 +67,6 @@ const SignUpPage = () => {
           Already have account? <Link to='/signin'>Sign In</Link>
         </StyledP>
       </SignForm>
-      </MainLayout>
     </>
   );
 };

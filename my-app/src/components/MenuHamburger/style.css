@@ -39,8 +39,8 @@
 .visible {
   position: absolute;
   z-index: 3;
-  height: calc(100% - 46px);
-  top: 45px;
+  height: calc(100vh - 46px);
+  top: 50px;
   left: 0;
   display: flex;
   flex-direction: column;

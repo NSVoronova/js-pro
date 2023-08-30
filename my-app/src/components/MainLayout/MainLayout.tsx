@@ -2,30 +2,28 @@ import React, {ReactNode, FC, useState, createContext} from 'react'
 import Header from '../Header/Header'
 import SearchPage from '../SearchPage/SearchPage';
 import Input from '../SignForm/Input/Input';
+import { useSelector } from 'react-redux';
+import { StyledMain, StyledFooter, StyledWrapper } from './styledLayout';
 
-
-export const ThemeContext = createContext({});
 
 export interface IMainLayout {
   className?: string,
   children?: ReactNode,
 }
 const MainLayout: FC<IMainLayout> = ({ children }) => {
-  const [theme, setTheme] = useState(true);
+  const theme = useSelector(({theme}) => theme);
 
   return (
-    <ThemeContext.Provider value ={{theme}}>
-    <div className='wrapper'>
+    <StyledWrapper  theme={theme} className='wrapper'>
       <Header isLight={true}/>
-      <main>
+      <StyledMain>
         {children}
-      </main>
-      <footer>
+      </StyledMain>
+      <StyledFooter theme={theme}>
         <span>2022</span>
         <span>All rights reserved</span>
-      </footer>
-    </div>
-    </ThemeContext.Provider>
+      </StyledFooter>
+    </StyledWrapper>
   );
 };
 
