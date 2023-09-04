@@ -19,8 +19,8 @@ export const StyledBurgerHomeDiv = styled.div<{theme: "light" | "dark"}>`
   padding-top: 20px;
   width: 100%;
   height: calc(100vh - 48px);
-  background-color: ${props => props.theme === "light" ? "white" : "rgba(128, 128, 128)"};
-  color: ${props => props.theme === "light" ? "rgb(235, 231, 231)" : "rgba(128, 128, 128)"};
+  background-color: ${({theme}) => theme === "light" ? "white" : "rgba(128, 128, 128)"};
+  color: ${({theme}) => theme === "light" ? "rgb(235, 231, 231)" : "rgba(128, 128, 128)"};
 `;
 
 export const StyledBurgerThemeDiv = styled.div`
@@ -41,8 +41,8 @@ padding: 20px;
 `;
 
 export const StyledThemeDiv = styled.div<{isLight?: boolean}>`
-color: ${props => props.isLight ? 'grey' : 'black'};
+color: ${({isLight}) => isLight ? 'grey' : 'black'};
 `
 export const StyledLinkSpan = styled.span<{theme: "light" | "dark"}>`
-color: ${props => props.theme === "light" ? "black" : "white"}
+color: ${({theme}) => theme === "light" ? "black" : "white"}
 `
