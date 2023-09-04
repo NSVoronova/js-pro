@@ -4,7 +4,6 @@ import Title from "src/components/Title/Title";
 import SignForm from "../SignForm";
 import Input from "../Input/Input";
 import SignButton from "../SignButton/SignButton";
-import MainLayout from "src/components/MainLayout/MainLayout";
 
 const SignPage = () => {
   const [email, setEmail] = useState("");
@@ -24,8 +23,8 @@ const SignPage = () => {
   };
   return (
     <>
-    <MainLayout>
       <Link to='/'>Back to home...</Link>
+      <br/>
       <Title text="Sign In"></Title>
       <SignForm customClass="sign-in__form">
         <Input
@@ -50,7 +49,6 @@ const SignPage = () => {
           customClass="sign__button"
         />
       </SignForm>
-      </MainLayout>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { StyledInput, StyledLabel } from "./styled";
 
 interface IInput {
@@ -10,13 +10,6 @@ interface IInput {
 }
 
 const Input: FC<IInput> = ({ label, placeholder, type, value, onChange }) => {
-  const [inputValue, setInputValue] = useState("");
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.currentTarget.value);
-    onChange(event.target.value);
-  };
-
   return (
     <>
       <StyledLabel>{label}</StyledLabel>

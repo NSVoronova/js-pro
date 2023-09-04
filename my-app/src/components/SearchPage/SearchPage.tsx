@@ -6,8 +6,13 @@ import MainLayout from '../MainLayout/MainLayout'
 import { IPost } from '../Posts/PostsList'
 import MiddlePost from '../Posts/MiddlePost/MiddlePost'
 import "./SearchPage.css"
+import { StyledMain, StyledFooter, StyledWrapper } from '../MainLayout/styledLayout';
+import { useSelector } from 'react-redux'
+import Title from '../Title/Title'
 
 const SearchPage = () => {
+  const theme = useSelector(({theme}) => theme);
+
    const [dataSearch, setDataSearch] = useState("");
    const [posts, setPosts] = useState<IPost[]>([]);
 
@@ -29,10 +34,9 @@ const SearchPage = () => {
   let searchPosts = posts.filter((post) => {
     return post.title.toLowerCase().includes(dataSearch);
   });
-  console.log(searchPosts, dataSearch);
 
   return (
-    <div className='wrapper'>
+    <StyledWrapper  theme={theme} className='wrapper'>
       <Header>
       <Input
           placeholder="Search"
@@ -41,18 +45,18 @@ const SearchPage = () => {
           onChange={setDataSearch}
         />
       </Header>
-      <main>
-        <h1>Search results <span className='search__span'>{dataSearch}</span></h1>
+      <StyledMain theme={theme}>
+        <Title text='Search results '></Title> <h1 className='search__span'>{dataSearch}</h1>
         <div>
           {Array.isArray(searchPosts) && searchPosts.map(({ id, title, image, text, date }: IPost) => (
             dataSearch.length >2 ? <MiddlePost key={id} id={id} title={title} text={text} image={image} date={date} customClass='search__post' /> : null ))}
         </div>
-      </main>
-      <footer>
+      </StyledMain>
+      <StyledFooter theme={theme}>
         <span>2022</span>
         <span>All rights reserved</span>
-      </footer>
-    </div>
+      </StyledFooter>
+    </StyledWrapper>
   );
 }
 
