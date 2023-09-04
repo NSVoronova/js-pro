@@ -1,10 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import Header from '../Header/Header'
 import Title from '../Title/Title'
 import SignForm from '../SignForm/SignForm'
 import SignButton from '../SignForm/SignButton/SignButton'
-import SignUpPage from '../SignForm/SignUpPage/SignUpPage'
 
 const Home = () => {
   return (

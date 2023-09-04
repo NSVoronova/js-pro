@@ -1,7 +1,5 @@
-import React, {ReactNode, FC, useState, createContext} from 'react'
+import React, {ReactNode, FC} from 'react'
 import Header from '../Header/Header'
-import SearchPage from '../SearchPage/SearchPage';
-import Input from '../SignForm/Input/Input';
 import { useSelector } from 'react-redux';
 import { StyledMain, StyledFooter, StyledWrapper } from './styledLayout';
 

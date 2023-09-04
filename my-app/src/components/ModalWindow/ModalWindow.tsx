@@ -1,11 +1,6 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { StyledModalContentDiv, StyledModalDiv } from "./StyledModal";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { IPost } from "../Posts/PostsList";
-import PostViewPage from "../Posts/PostViewPage/PostViewPage";
-import MiddlePost from "../Posts/MiddlePost/MiddlePost";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 interface IModal {
   className?: string,

@@ -4,7 +4,6 @@ import Title from "src/components/Title/Title";
 import SignForm from "../SignForm";
 import Input from "../Input/Input";
 import SignButton from "../SignButton/SignButton";
-import MainLayout from "src/components/MainLayout/MainLayout";
 
 const SignPage = () => {
   const [email, setEmail] = useState("");

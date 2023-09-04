@@ -28,7 +28,6 @@
 .user {
   padding: 10px;
   text-align: center;
-  width: 80px;
 }
 .burger__opened {
   display: none;

@@ -1,56 +1,60 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, Link, useParams } from "react-router-dom";
+import React from "react";
+import {  Link, useParams } from "react-router-dom";
 import Title from "src/components/Title/Title";
 import "./PostViewPage.css";
 import ModalWindow from "src/components/ModalWindow/ModalWindow";
 import { IPost } from "../PostsList";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
+export interface IState {
+  theme: string,
+  modalInfo: {
+    isOpen: boolean,
+    id: number,
+  },
+  posts: [] | IPost[],
+  activeTab: string,
+}
 const PostViewPage = () => {
 
-  const modalInfo: { isOpen: boolean, payload: number } = useSelector(
-    (state: { modalInfo: { isOpen: boolean, payload: number } }) => state.modalInfo
-  );
+  const currentState = useSelector( (state: IState) => state);
   const dispatch = useDispatch();
+let posts = currentState.posts;
+let params = useParams();
+let id = 0;
+if (params.id) {
+   id = parseInt(params.id)
+}
 
-  const { state } = useLocation();
-  console.log(state); //{id=...}
-  
-  const [posts, setPosts] = useState<IPost[]>([]);
-  let fetchPosts = async () => {
-    try {
-      let responce = await fetch('https://64d916c7e947d30a2609e71e.mockapi.io/posts_cards');
-      let jsonPosts: IPost[] = await responce.json();
-      setPosts(jsonPosts);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  useEffect(() => {
-    fetchPosts()
-  }, [])
-
-  
-  let nextId = state.id + 1;
-  let previousId = state.id - 1;
+  let nextId = id + 1;
+  let previousId = id - 1;
   return (
     <div className="post__view">
-      {Array.isArray(posts) && posts.map(({ id, title, image, text, date }: IPost) => (
-        id === state.id ?
-      <><Title text={state.title ? state.title : posts[previousId].title} />
+      <Link to={`/posts`}>Back to posts</Link>
+      {Array.isArray(posts) && posts.map(({ id: postId, title, image, text, date, likes }: IPost) => (
+        postId === id ?
+      <><Title text={title} />
       <img
-        src={state.image ? state.image : posts[previousId].image}
+        src={image}
         alt="avada"
         onClick={() => {
           dispatch({ type: "TOGGLE_MODAL", openModal: true, payload: id });
         }} 
       />
-      <p>{state.text ? state.text : posts[previousId].text}</p>
+      <p>{text}</p>
       <div className="reactions">
         <div>
-          👍<span>20</span> 👎
+        <span
+              onClick={() => dispatch({ type: "ADD_LIKE", payload: id  })}
+            >
+              👍
+            </span><span>{likes || 0}</span>{" "} <span
+              onClick={() =>
+                dispatch({ type: "REMOVE_LIKE", payload: id })
+              }
+            >
+              👎
+            </span>
         </div>
         <div>
           <div className="bookmark">
@@ -63,18 +67,18 @@ const PostViewPage = () => {
         </div>
       </div>
       <div className="posts__navigation">
-        {state.id > 1 ? (
+        {id > 1 ? (
           <div>
-            <Link to={`/post/${previousId}`} state={{ posts }}>
+            <Link to={`/post/${previousId}`}>
               🠔 Previous Post
             </Link>
           </div>
         ) : (
           <div>🠔 Previous Post</div>
         )}
-        {state.id < posts.length ? (
+        {id < posts.length ? (
           <div>
-            <Link to={`/post/${nextId}`} state={{ posts }}>
+            <Link to={`/post/${nextId}`}>
               Next post 🠖
             </Link>
           </div>

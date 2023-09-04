@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 
-export const StyledMain = styled.main`
+export const StyledMain = styled.main<{theme: string}>`
   padding-top: 60px;
 `
 export const StyledFooter = styled.footer<{theme: "light" | "dark"}>`

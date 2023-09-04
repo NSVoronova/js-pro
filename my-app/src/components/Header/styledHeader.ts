@@ -6,6 +6,7 @@ z-index: 2;
 width: 100%;
 `
 export const StyledUserImg = styled.img`
+  margin-right: 15px;
   width: 32px;
 `;
 

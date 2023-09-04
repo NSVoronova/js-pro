@@ -6,11 +6,13 @@ import MainLayout from '../MainLayout/MainLayout'
 import { IPost } from '../Posts/PostsList'
 import MiddlePost from '../Posts/MiddlePost/MiddlePost'
 import "./SearchPage.css"
-import { StyledMain, StyledFooter } from '../MainLayout/styledLayout';
+import { StyledMain, StyledFooter, StyledWrapper } from '../MainLayout/styledLayout';
 import { useSelector } from 'react-redux'
 import Title from '../Title/Title'
 
 const SearchPage = () => {
+  const theme = useSelector(({theme}) => theme);
+
    const [dataSearch, setDataSearch] = useState("");
    const [posts, setPosts] = useState<IPost[]>([]);
 
@@ -24,7 +26,6 @@ const SearchPage = () => {
       console.log(err);
     }
   }
-  const theme = useSelector(({theme}) => theme);
 
   useEffect(() => {
     fetchPosts()
@@ -33,10 +34,9 @@ const SearchPage = () => {
   let searchPosts = posts.filter((post) => {
     return post.title.toLowerCase().includes(dataSearch);
   });
-  console.log(searchPosts, dataSearch);
 
   return (
-    <div className='wrapper'>
+    <StyledWrapper  theme={theme} className='wrapper'>
       <Header>
       <Input
           placeholder="Search"
@@ -56,7 +56,7 @@ const SearchPage = () => {
         <span>2022</span>
         <span>All rights reserved</span>
       </StyledFooter>
-    </div>
+    </StyledWrapper>
   );
 }
 

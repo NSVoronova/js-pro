@@ -1,4 +1,4 @@
-import React, { useState, ReactNode, FC, createContext } from "react";
+import React, { useState, ReactNode, FC } from "react";
 import { Link } from "react-router-dom";
 import MenuHamburger from "../MenuHamburger/MenuHamburger";
 import {
@@ -11,9 +11,8 @@ import {
   StyledLinkSpan,
   StyledHeader,
 } from "./styledHeader";
-import { IMainLayout } from "../MainLayout/MainLayout";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 
 export interface IHeader {
   className?: string,
@@ -53,8 +52,7 @@ const Header: FC<IHeader> = ({ children }) => {
         <div className="search__container">{children}</div>
         <Link to="/search">&#x1f50d;</Link>
         <div className="user">
-          {}
-          <StyledUserImg src="images/icon.png" alt="user" />
+          <StyledUserImg src="/images/icon.png" alt="user" />
         </div>
       </div>
       <div className={`burger__opened ${isOpen ? "visible" : ""}`}>

@@ -4,8 +4,8 @@ import MiddlePost from './MiddlePost/MiddlePost'
 import './PostsListStyle.css'
 import '../SignForm/Input/styled'
 import ModalWindow from '../ModalWindow/ModalWindow'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { IState } from './PostViewPage/PostViewPage'
 
 export interface IPost {
   image: string,
@@ -16,21 +16,22 @@ export interface IPost {
   author?: number,
   id: number,
   customClass: string,
+  likes?: number,
+  isFavorite?: boolean
 }
 
 const PostsList = () => {
-  const modalInfo: { isOpen: boolean; id: number } = useSelector(
-    (state: { modalInfo: { isOpen: boolean; id: number} }) => state.modalInfo
-  );
-
+  const currentState = useSelector( (state: IState) => state);
+  const posts = currentState.posts;
+  let currentTab = currentState.activeTab;
   const dispatch = useDispatch();
-  
-  const [posts, setPosts] = useState<IPost[]>([]);
+
+
   let fetchPosts = async () => {
     try {
       let responce = await fetch('https://64d916c7e947d30a2609e71e.mockapi.io/posts_cards');
       let jsonPosts: IPost[] = await responce.json();
-      setPosts(jsonPosts);
+      dispatch({type: "SET_POSTS", payload: jsonPosts})
     } catch (err) {
       console.log(err);
     }
@@ -40,20 +41,20 @@ const PostsList = () => {
     fetchPosts()
   }, [])
 
-
+  
 
   return (
     <>
       <div className='posts__wrapper'>
         <div className='middle__post__wrapper'>
-          {Array.isArray(posts) && posts.map(({ id, title, image, text, date }: IPost) => (
+          {Array.isArray(posts) && posts.map(({ id, title, image, text, date, likes }: IPost) => (
             id < 7 ?
-               <MiddlePost key={image} id={id} title={title} text={text} image={image} date={date} customClass='middle__post' /> : <></>))}
+               <MiddlePost key={id} id={id} title={title} text={text} image={image} date={date} likes={likes} customClass='middle__post' /> : null))}
         </div>
         <div className='small__post__wrapper'>
-          {Array.isArray(posts) && posts.map(({ id, title, image, text, date }: IPost) => (
+          {Array.isArray(posts) && posts.map(({ id, title, image, text, date, likes }: IPost) => (
             id >= 7 ?
-        <MiddlePost key={id} id={id} title={title} text={text} image={image} date={date} customClass='small__post' /> : <></>))}
+        <MiddlePost key={id} id={id} title={title} text={text} image={image} date={date} likes={likes} customClass='small__post' /> : null))}
         </div>
       </div>
       <div className='pagination'>
@@ -62,9 +63,7 @@ const PostsList = () => {
         <div>Вперед 🠖</div>
       </div>
       <ModalWindow>
-      {Array.isArray(posts) &&
-          posts.map(({ id, title, image, text, date }: IPost) =>
-            id === modalInfo.id ? (
+      {Array.isArray(posts) && posts.filter(post => post.id === currentState.modalInfo.id).map(({ id, title, image,text,date, likes}: IPost) =>
               <MiddlePost
                 key={image}
                 id={id}
@@ -72,12 +71,10 @@ const PostsList = () => {
                 text={text}
                 image={image}
                 date={date}
+                likes={likes}
                 customClass="modal__post"
               />
-            ) : (
-              <></>
-            )
-          )}
+            )}
       </ModalWindow>
     </>
   )

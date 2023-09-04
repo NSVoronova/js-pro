@@ -11,7 +11,7 @@ export const StyledModalDiv = styled.div<{openModal?: boolean}>`
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: ${props => props.openModal === false ? "scale(0)" : "scale(1)"};
+  transform: ${ ({openModal}) => openModal ? "scale(1)" : "scale(0)"};
 `
 
 export const StyledModalContentDiv = styled.div`
