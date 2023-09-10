@@ -1,6 +1,7 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode} from "react";
 import { StyledModalContentDiv, StyledModalDiv } from "./StyledModal";
 import { useSelector, useDispatch } from "react-redux";
+import { TOGGLE_MODAL_CREATOR } from "src/actions/actions";
 
 interface IModal {
   className?: string,
@@ -15,8 +16,8 @@ const ModalWindow: React.FC<IModal> = ({children}) => {
   const dispatch = useDispatch();
   return (
     <StyledModalDiv
-      openModal={modalInfo.isOpen}
-      onClick={() => dispatch({ type: "TOGGLE_MODAL", openModal: false, payload: null })}
+      $openModal={modalInfo.isOpen}
+      onClick={() => dispatch(TOGGLE_MODAL_CREATOR(false,null))}
     >
         <StyledModalContentDiv onClick={(e) => e.stopPropagation()}>
         {children}

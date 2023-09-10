@@ -1,4 +1,5 @@
-import { legacy_createStore as createStore} from 'redux';
+import { legacy_createStore as createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const initialState = {
@@ -9,6 +10,7 @@ const initialState = {
   },
   posts: [],
   activeTab: "All",
+  isLoading: false,
 };
 
 const rootReducer = (state = initialState, action: any) => {
@@ -25,7 +27,6 @@ const rootReducer = (state = initialState, action: any) => {
         modalInfo:{
           isOpen: action.openModal,
           id: action.payload,
-          posts: action.posts
         },
       }
     }
@@ -77,11 +78,17 @@ const rootReducer = (state = initialState, action: any) => {
         activeTab: action.payload,
       }
     }
+    case "SET_LOADING" : {
+      return {
+        ...state,
+        isLoading: !state.isLoading,
+      }
+    }
     default :
       return state;
   }
 };
 
-const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 export default store;

@@ -1,71 +1,77 @@
-import React, { useState, useEffect } from 'react'
-import {Link} from 'react-router-dom'
-import MiddlePost from './MiddlePost/MiddlePost'
-import './PostsListStyle.css'
-import '../SignForm/Input/styled'
-import ModalWindow from '../ModalWindow/ModalWindow'
-import { useSelector, useDispatch } from 'react-redux'
-import { IState } from './PostViewPage/PostViewPage'
+import React from "react";
+import MiddlePost from "./MiddlePost/MiddlePost";
+import "./PostsListStyle.css";
+import "../SignForm/Input/styled";
+import ModalWindow from "../ModalWindow/ModalWindow";
+import { useSelector } from "react-redux";
 
 export interface IPost {
-  image: string,
-  text: string,
-  date: string,
-  lesson_num?: number,
-  title: string,
-  author?: number,
-  id: number,
-  customClass: string,
-  likes?: number,
-  isFavorite?: boolean
+  image: string;
+  text: string;
+  date: string;
+  lesson_num?: number;
+  title: string;
+  author?: number;
+  id: number;
+  customClass: string;
+  likes?: number;
+  isFavorite?: boolean;
 }
 
 const PostsList = () => {
-  const currentState = useSelector( (state: IState) => state);
-  const posts = currentState.posts;
-  let currentTab = currentState.activeTab;
-  const dispatch = useDispatch();
-
-
-  let fetchPosts = async () => {
-    try {
-      let responce = await fetch('https://64d916c7e947d30a2609e71e.mockapi.io/posts_cards');
-      let jsonPosts: IPost[] = await responce.json();
-      dispatch({type: "SET_POSTS", payload: jsonPosts})
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  useEffect(() => {
-    fetchPosts()
-  }, [])
-
+  const posts = useSelector(({posts}) => posts);
+  const modalInfo = useSelector(({modalInfo}) => modalInfo)
   
-
   return (
     <>
-      <div className='posts__wrapper'>
-        <div className='middle__post__wrapper'>
-          {Array.isArray(posts) && posts.map(({ id, title, image, text, date, likes }: IPost) => (
-            id < 7 ?
-               <MiddlePost key={id} id={id} title={title} text={text} image={image} date={date} likes={likes} customClass='middle__post' /> : null))}
+      <div className="posts__wrapper">
+        <div className="middle__post__wrapper">
+          {Array.isArray(posts) &&
+            posts.map(({ id, title, image, text, date, likes }: IPost) =>
+              id < 7 ? (
+                <MiddlePost
+                  key={id}
+                  id={id}
+                  title={title}
+                  text={text}
+                  image={image}
+                  date={date}
+                  likes={likes}
+                  customClass="middle__post"
+                />
+              ) : null
+            )}
         </div>
-        <div className='small__post__wrapper'>
-          {Array.isArray(posts) && posts.map(({ id, title, image, text, date, likes }: IPost) => (
-            id >= 7 ?
-        <MiddlePost key={id} id={id} title={title} text={text} image={image} date={date} likes={likes} customClass='small__post' /> : null))}
+        <div className="small__post__wrapper">
+          {Array.isArray(posts) &&
+            posts.map(({ id, title, image, text, date, likes }: IPost) =>
+              id >= 7 ? (
+                <MiddlePost
+                  key={id}
+                  id={id}
+                  title={title}
+                  text={text}
+                  image={image}
+                  date={date}
+                  likes={likes}
+                  customClass="small__post"
+                />
+              ) : null
+            )}
         </div>
       </div>
-      <div className='pagination'>
+      <div className="pagination">
         <div>🠔 Назад</div>
         <div>1 2 3 ... 6</div>
         <div>Вперед 🠖</div>
       </div>
       <ModalWindow>
-      {Array.isArray(posts) && posts.filter(post => post.id === currentState.modalInfo.id).map(({ id, title, image,text,date, likes}: IPost) =>
+        {Array.isArray(posts) &&
+          posts
+            .filter((post) => post.id === modalInfo.id)
+            .map(({ id, title, image, text, date, likes }: IPost) => (
               <MiddlePost
-                key={image}
+                key={id}
                 id={id}
                 title={title}
                 text={text}
@@ -74,10 +80,10 @@ const PostsList = () => {
                 likes={likes}
                 customClass="modal__post"
               />
-            )}
+            ))}
       </ModalWindow>
     </>
-  )
-}
+  );
+};
 
-export default PostsList
+export default PostsList;

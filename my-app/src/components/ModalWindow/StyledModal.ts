@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const StyledModalDiv = styled.div<{openModal?: boolean}>`
+export const StyledModalDiv = styled.div<{$openModal?: boolean}>`
   height: 100vh;
   width: 100vw;
   background-color: rgba(0,0,0,0.4);
@@ -11,7 +11,7 @@ export const StyledModalDiv = styled.div<{openModal?: boolean}>`
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: ${ ({openModal}) => openModal ? "scale(1)" : "scale(0)"};
+  transform: ${ (props) => props.$openModal ? "scale(1)" : "scale(0)"};
 `
 
 export const StyledModalContentDiv = styled.div`

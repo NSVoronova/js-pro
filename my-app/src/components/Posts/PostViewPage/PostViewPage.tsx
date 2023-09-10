@@ -5,6 +5,7 @@ import "./PostViewPage.css";
 import ModalWindow from "src/components/ModalWindow/ModalWindow";
 import { IPost } from "../PostsList";
 import { useSelector, useDispatch } from "react-redux";
+import { ADD_LIKE_CREATOR, ADD_TO_FAVORITE_CREATOR, REMOVE_LIKE_CREATOR, TOGGLE_MODAL_CREATOR } from "src/actions/actions";
 
 export interface IState {
   theme: string,
@@ -17,9 +18,8 @@ export interface IState {
 }
 const PostViewPage = () => {
 
-  const currentState = useSelector( (state: IState) => state);
+  const posts = useSelector(({posts}) => posts);
   const dispatch = useDispatch();
-let posts = currentState.posts;
 let params = useParams();
 let id = 0;
 if (params.id) {
@@ -31,26 +31,26 @@ if (params.id) {
   return (
     <div className="post__view">
       <Link to={`/posts`}>Back to posts</Link>
-      {Array.isArray(posts) && posts.map(({ id: postId, title, image, text, date, likes }: IPost) => (
+      {Array.isArray(posts) && posts.map(({ id: postId,  title, image, text, date, likes }: IPost) => (
         postId === id ?
-      <><Title text={title} />
+      <><Title text={title} key={id} />
       <img
         src={image}
         alt="avada"
         onClick={() => {
-          dispatch({ type: "TOGGLE_MODAL", openModal: true, payload: id });
-        }} 
+          dispatch(TOGGLE_MODAL_CREATOR(true, id));
+        }}
       />
       <p>{text}</p>
       <div className="reactions">
         <div>
         <span
-              onClick={() => dispatch({ type: "ADD_LIKE", payload: id  })}
+              onClick={() => dispatch(ADD_LIKE_CREATOR(id))}
             >
               👍
             </span><span>{likes || 0}</span>{" "} <span
               onClick={() =>
-                dispatch({ type: "REMOVE_LIKE", payload: id })
+                dispatch(REMOVE_LIKE_CREATOR(id))
               }
             >
               👎
@@ -61,6 +61,9 @@ if (params.id) {
             <img
               src="https://cdn-icons-png.flaticon.com/512/6924/6924811.png"
               alt="#"
+              onClick={() => {
+                dispatch(ADD_TO_FAVORITE_CREATOR(id));
+              }}
             />
             <span> Add to favorites</span>
           </div>
