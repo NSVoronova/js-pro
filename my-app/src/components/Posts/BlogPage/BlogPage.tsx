@@ -8,7 +8,6 @@ const BlogPage = () => {
     <>
       <Title text='Blog'/>
       <TabContainer/>
-      
     </>
   )
 }

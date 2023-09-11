@@ -6,7 +6,10 @@
 }
 
 .post__view> img {
-  margin: 20px;
+  margin: 20px auto;
+  width: 600px;
+  height: 400px;
+  object-fit: cover;
 }
 
 .post__view >p {

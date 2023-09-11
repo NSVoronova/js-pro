@@ -12,33 +12,34 @@ import {
   StyledHeader,
 } from "./styledHeader";
 import { useSelector, useDispatch } from "react-redux";
+import { TOGGLE_THEME_CREATOR } from "src/actions/actions";
 
 
 export interface IHeader {
-  className?: string,
+  // className?: string,
   children?: ReactNode,
-  isLight?: boolean,
+  isLight: boolean,
 }
 
 const Header: FC<IHeader> = ({ children }) => {
-
+  //children я использую для Search
   const [isOpen, setIsOpen] = useState(false);
   const [isLight, setIsLight] = useState(true);
 
   const handleBurgerClick = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(!isOpen); //открытие и закрытие бургера
   };
 
   const handleToggle = () => {
-    setIsLight(prevState => !prevState);
+    setIsLight(prevState => !prevState); //цвет кнопок переключения темы
   }
 
-  const theme = useSelector(({theme}) => theme);
+  const theme = useSelector(({theme}) => theme); //стягиваем значение темы из redux
 
   const dispatch = useDispatch();
 
   let toggleThemeFunction = (theme : string) => {
-    dispatch({type: "TOGGLE_THEME", payload: theme});
+    dispatch(TOGGLE_THEME_CREATOR(theme)); // отправка значения темы в redux
     handleToggle();
   }
   return (
@@ -61,8 +62,8 @@ const Header: FC<IHeader> = ({ children }) => {
           <Link to="/"><StyledLinkSpan theme={theme}>Home</StyledLinkSpan></Link>
         </StyledBurgerHomeDiv>
         <StyledBurgerThemeDiv>
-          <StyledThemeDiv isLight={isLight} onClick={() => toggleThemeFunction("light")}>sun</StyledThemeDiv>
-          <StyledThemeDiv isLight={!isLight} onClick={() => toggleThemeFunction("dark")}>moon</StyledThemeDiv>
+          <StyledThemeDiv $isLight={isLight} onClick={() => toggleThemeFunction("light")}>sun</StyledThemeDiv>
+          <StyledThemeDiv $isLight={!isLight} onClick={() => toggleThemeFunction("dark")}>moon</StyledThemeDiv>
         </StyledBurgerThemeDiv>
         <StyledInOutDiv>Log Out</StyledInOutDiv>
       </div>
