@@ -6,23 +6,21 @@ import Input from "../Input/Input";
 import SignButton from "../SignButton/SignButton";
 import { StyledA, StyledP } from "./styled";
 import MainLayout from "src/components/MainLayout/MainLayout";
+import { useDispatch } from "react-redux";
+import { CREATE_USER } from "src/actions/actions";
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "redux-thunk";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  const [username, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
 
   const handleClick = () => {
-    if (email && name && password) {
-      console.log("Зарегестрирован!");
-      setEmail("");
-      setName("");
-      setPassword("");
-      setConfirmPassword("");
-    } else {
-      alert("Заполните все поля!");
-    }
+    dispatch(CREATE_USER({username,email,password}));
+    console.log({username,email,password})
   };
   return (
     <>
@@ -34,7 +32,7 @@ const SignUpPage = () => {
           label="Name"
           placeholder="Your Name"
           type="text"
-          value={name}
+          value={username}
           onChange={setName}
         />
         <Input
@@ -59,6 +57,7 @@ const SignUpPage = () => {
           onChange={setConfirmPassword}
         />
         <SignButton
+         type="button"
           text={"Sign Up"}
           onClick={handleClick}
           customClass="sign__button"

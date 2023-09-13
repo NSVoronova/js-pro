@@ -9,8 +9,24 @@ const initialState = {
     id: null
   },
   posts: [],
+  user: {
+    username: '',
+    email: '',
+    id: null,
+    isActivated: false
+  },
   activeTab: "All",
   isLoading: false,
+  currentPost: {
+    id: 0,
+  image: "",
+  text: "",
+  date: "",
+  lesson_num: 0,
+  title: "",
+  description: "",
+  author: 0
+  }
 };
 
 const rootReducer = (state = initialState, action: any) => {
@@ -84,6 +100,25 @@ const rootReducer = (state = initialState, action: any) => {
         isLoading: !state.isLoading,
       }
     }
+    case 'SET_USER':  {
+      return {
+          ...state,
+          user: {...state.user, username: action.payload.username, email: action.payload.email, id: action.payload.id}
+      };
+  }
+  case 'SET_ACTIVATION':  {
+    return {
+        ...state,
+        user: {...state.user, isActivated: action.payload} 
+    };
+}
+case 'SET_CURRENT_POST':  {
+  return {
+      ...state,
+      currentPost: {...state.currentPost, title: action.payload.title, image: action.payload.image, text: action.payload.text} 
+  };
+}
+
     default :
       return state;
   }
