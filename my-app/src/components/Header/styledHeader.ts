@@ -35,6 +35,7 @@ export const StyledBurgerThemeDiv = styled.div`
 `;
 
 export const StyledInOutDiv = styled.div`
+cursor: pointer;
 background-color: rgb(191, 191, 191);
 width: 100%;
 padding: 20px;

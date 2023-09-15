@@ -1,5 +1,5 @@
 import React, { useState, ReactNode, FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import MenuHamburger from "../MenuHamburger/MenuHamburger";
 import {
   StyledUserImg,
@@ -42,6 +42,16 @@ const Header: FC<IHeader> = ({ children }) => {
     dispatch(TOGGLE_THEME_CREATOR(theme)); // отправка значения темы в redux
     handleToggle();
   }
+  const navigate = useNavigate();
+
+  const logOut = (() => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userInfo");
+    navigate('/signin');
+  })
+
+  let userInfo: string | null = localStorage.getItem("userInfo");
+
   return (
     <StyledHeader>
       <div className="burger__container">
@@ -53,11 +63,12 @@ const Header: FC<IHeader> = ({ children }) => {
         <div className="search__container">{children}</div>
         <Link to="/search">&#x1f50d;</Link>
         <div className="user">
-          <StyledUserImg src="/images/icon.png" alt="user" />
+          {userInfo ? JSON.parse(userInfo).username : <StyledUserImg src="/images/icon.png" alt="user" />}
+          
         </div>
       </div>
       <div className={`burger__opened ${isOpen ? "visible" : ""}`}>
-        <StyledBurgerUserDiv>Artem Malkin</StyledBurgerUserDiv>
+        <StyledBurgerUserDiv>{userInfo ? JSON.parse(userInfo).username : `Log In`}</StyledBurgerUserDiv>
         <StyledBurgerHomeDiv theme={theme}>
           <Link to="/"><StyledLinkSpan theme={theme}>Home</StyledLinkSpan></Link>
         </StyledBurgerHomeDiv>
@@ -65,7 +76,7 @@ const Header: FC<IHeader> = ({ children }) => {
           <StyledThemeDiv $isLight={isLight} onClick={() => toggleThemeFunction("light")}>sun</StyledThemeDiv>
           <StyledThemeDiv $isLight={!isLight} onClick={() => toggleThemeFunction("dark")}>moon</StyledThemeDiv>
         </StyledBurgerThemeDiv>
-        <StyledInOutDiv>Log Out</StyledInOutDiv>
+        <StyledInOutDiv onClick={() => logOut()}>Log Out</StyledInOutDiv>
       </div>
     </StyledHeader>
   );
