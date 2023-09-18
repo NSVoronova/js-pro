@@ -5,7 +5,6 @@ import SignForm from "../SignForm";
 import Input from "../Input/Input";
 import SignButton from "../SignButton/SignButton";
 import { StyledA, StyledP } from "./styled";
-import MainLayout from "src/components/MainLayout/MainLayout";
 import { useDispatch } from "react-redux";
 import { CREATE_USER } from "src/actions/actions";
 import { AnyAction } from "redux";

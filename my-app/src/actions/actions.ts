@@ -1,7 +1,7 @@
 import { IPost } from "src/components/Posts/PostsList";
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
-import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -54,7 +54,6 @@ export const FETCH_POSTS = () => {
         "https://studapi.teachmeskills.by/blog/posts/?limit=12"
       );
       let jsonPosts = await response.json();
-      console.log(jsonPosts.results);
       dispatch(SET_POSTS_CREATOR(jsonPosts.results));
     } catch (err) {
       console.log(err);
@@ -120,3 +119,45 @@ export const FETCH_POST = (id: number) => {
   };
 };
 
+export const SIGN_IN = (navigate: any, payload: { email: string, password: string}) => {
+  return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
+    dispatch(SET_LOADING_CREATOR());
+    try {
+      let response = await fetch(
+        "https://studapi.teachmeskills.by/auth/jwt/create/",
+        { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload)} 
+      );
+      let responseJson: {refresh: string, access: string} = await response.json();
+      if (responseJson.refresh) {
+        localStorage.setItem("token", JSON.stringify(responseJson));
+          await navigate("/posts");
+      } else {
+        alert("Неверно введены данные")
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(SET_LOADING_CREATOR());
+    }
+  };
+};
+
+export const GET_USER = () => {
+  return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
+    try {
+      let token: string |null = localStorage.getItem('token') ;
+     if (token) {
+      let objectToken = JSON.parse(token); 
+      let response = await fetch(
+        "https://studapi.teachmeskills.by/auth/users/me",
+        { method: "GET", headers: {"Content-Type": "application/json",'Authorization': `Bearer ${objectToken.access}`}} 
+      );
+      let responseUser = await response.json();
+      localStorage.setItem("userInfo", JSON.stringify(responseUser));
+
+    }
+  }  catch (err) {
+    console.log(err);
+  }
+}
+}

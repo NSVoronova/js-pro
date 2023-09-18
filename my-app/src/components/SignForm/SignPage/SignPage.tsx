@@ -1,26 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {Link, useNavigate} from 'react-router-dom'
 import Title from "src/components/Title/Title";
 import SignForm from "../SignForm";
 import Input from "../Input/Input";
 import SignButton from "../SignButton/SignButton";
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import { useDispatch } from "react-redux";
+import { GET_USER, SIGN_IN } from "src/actions/actions";
 
 const SignPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   const navigate = useNavigate();
-  let user = {
-    email: "a",
-    password: "1234",
+
+
+
+  const handleClick = async () => {
+   await dispatch(SIGN_IN(navigate,{email,password}));
+   await dispatch(GET_USER());
   };
-  const handleClick = () => {
-    if (email === user.email && password === user.password) {
-      navigate("/success");
-    } else {
-      alert("Попробуй еще раз");
-    }
-  };
+
+
   return (
     <>
       <Link to='/'>Back to home...</Link>
