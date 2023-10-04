@@ -18,9 +18,17 @@ export const StyledBurgerUserDiv = styled.div`
 export const StyledBurgerHomeDiv = styled.div<{theme: "light" | "dark"}>`
   padding-top: 20px;
   width: 100%;
-  height: calc(100vh - 48px);
+  height: 50px;
   background-color: ${(props) => props.theme === "light" ? "white" : "rgba(128, 128, 128)"};
   color: ${(props) => props.theme === "light" ? "rgb(235, 231, 231)" : "rgba(128, 128, 128)"};
+`;
+
+export const StyledLastDiv = styled.div<{theme: "light" | "dark"}>`
+padding-top: 20px;
+width: 100%;
+height: 100%;
+background-color: ${(props) => props.theme === "light" ? "white" : "rgba(128, 128, 128)"};
+color: ${(props) => props.theme === "light" ? "rgb(235, 231, 231)" : "rgba(128, 128, 128)"};
 `;
 
 export const StyledBurgerThemeDiv = styled.div`

@@ -9,6 +9,7 @@ const initialState = {
     id: null
   },
   posts: [],
+  myPosts:[],
   user: {
     username: '',
     email: '',
@@ -116,6 +117,12 @@ case 'SET_CURRENT_POST':  {
   return {
       ...state,
       currentPost: {...state.currentPost, title: action.payload.title, image: action.payload.image, text: action.payload.text} 
+  };
+}
+case 'SET_MY_POSTS':  {
+  return {
+      ...state,
+      myPosts: action.payload
   };
 }
 
