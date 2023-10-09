@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Title from "src/components/Title/Title";
 import "./PostViewPage.css";
 import ModalWindow from "src/components/ModalWindow/ModalWindow";
@@ -19,7 +19,7 @@ export interface IState {
   activeTab: string,
 }
 const PostViewPage = () => {
-
+  const navigate = useNavigate();
   const post = useSelector(({ currentPost }) => currentPost);
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   let params = useParams();
@@ -34,7 +34,7 @@ const PostViewPage = () => {
 
   useEffect(() => {
     dispatch(FETCH_POST(id));
-  }, []);
+  }, [id]);
 
 
   return (
@@ -87,7 +87,7 @@ const PostViewPage = () => {
             <div>🠔 Previous Post</div>
           )}
           {(
-            <button onClick={() => <Navigate to={`/post/${nextId}`}/>}>  
+            <button onClick={() => navigate(`/post/${nextId}`)}>
                 Next post 🠖
             </button>
           )}

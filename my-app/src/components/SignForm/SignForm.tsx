@@ -6,9 +6,11 @@ import "./SignForm.css";
 const SignForm = ({
   customClass,
   children,
+  onSubmit
 }: {
   customClass?: string;
   children?: ReactNode;
+  onSubmit?:any
 }) => {
   const [isSignIn, setSignIn] = useState(false);
 
